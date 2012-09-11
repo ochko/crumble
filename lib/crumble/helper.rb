@@ -6,6 +6,7 @@ module Crumble
           trail.action.to_sym == params[:action].to_sym and
           trail.condition_met?(self)
       end
+      return unless crumb
       if wrapper = Beard.instance.html[:wrapper]
         content_tag(wrapper[:element], nil, :class => wrapper[:class]) do
           calculate_breadcrumb_trail(crumb.trail).join.html_safe
