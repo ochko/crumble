@@ -1,22 +1,21 @@
 require 'rubygems'
 gem 'rspec'
 
-require "#{File.dirname(__FILE__)}/../app/helpers/breadcrumbs_helper"
-require "#{File.dirname(__FILE__)}/../lib/breadcrumb"
+require "#{File.dirname(__FILE__)}/../lib/crumble"
 
 RSpec.configure do |config|
 
   config.before(:each) do
-    @old_trails = Breadcrumb.instance.trails
-    Breadcrumb.instance.trails = nil
+    @old_trails = Crumble.instance.trails
+    Crumble.instance.trails = nil
   
-    @old_crumbs = Breadcrumb.instance.crumbs
-    Breadcrumb.instance.crumbs = nil
+    @old_crumbs = Crumble.instance.crumbs
+    Crumble.instance.crumbs = nil
   end
   
   config.after(:each) do
-    Breadcrumb.instance.crumbs = @old_crumbs
-    Breadcrumb.instance.trails = @old_trails
+    Crumble.instance.crumbs = @old_crumbs
+    Crumble.instance.trails = @old_trails
   end
 
   public

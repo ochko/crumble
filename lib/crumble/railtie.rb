@@ -1,10 +1,8 @@
 module Crumble
-  if defined? Rails::Railtie
-    require 'rails'
-    class Railtie < Rails::Railtie
-      initializer 'breadcrumbs_helper.include_to_action_controller' do
-        require File.expand_path(File.dirname(__FILE__) + '/../../app/helpers/breadcrumbs_helper')
-        ActionController::Base.helper(BreadcrumbsHelper)
+  class Railtie < ::Rails::Railtie
+    initializer 'crumble' do |_app|
+      ActiveSupport.on_load(:action_view) do
+        ::ActionView::Base.send :include, Crumble::Helper
       end
     end
   end
