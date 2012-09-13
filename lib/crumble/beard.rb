@@ -42,8 +42,8 @@ module Crumble
       @trails ||= []
       actions = Array(actions)
       actions.each do |action|
-        controller = (@contexts + [controller]).map(&:to_s).join('/').to_sym
-        @trails << Trail.new(controller, action, trail, options, caller[2].split(":")[1])
+        roller = (@contexts + [controller]).map(&:to_s).join('/').to_sym
+        @trails << Trail.new(roller, action, trail, options, caller[2].split(":")[1])
       end
     end
     
