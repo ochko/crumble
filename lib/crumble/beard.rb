@@ -25,7 +25,7 @@ module Crumble
     
     Crumb = Struct.new(:name, :title, :url, :params)
     
-    attr_accessor :trails, :crumbs
+    attr_accessor :trails, :crumbs, :contexts
     
     def initialize
       @last_crumb_linked = true
@@ -34,6 +34,7 @@ module Crumble
     def self.configure(&blk)
       instance.crumbs = {}
       instance.trails = []
+      instance.contexts = []
       instance.instance_eval &blk
       instance.validate
     end
@@ -54,7 +55,6 @@ module Crumble
     end
     
     def context(name)
-      @contexts ||= []
       @contexts.push name
       yield
       @contexts.pop
