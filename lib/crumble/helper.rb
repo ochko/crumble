@@ -21,11 +21,11 @@ module Crumble
         crumb = Beard.instance.crumbs[crummy]
         if crummy == trail.last
           content_tag(Beard.instance.html[:trail][:element],
-                      eval(%Q{"#{assemble_crumb_title(crumb)}"}),
+                      eval(%Q{"#{assemble_crumb_title(crumb).gsub('"', "'")}"}),
                       Beard.instance.html[:trail][:last])
         else
           content_tag(Beard.instance.html[:trail][:element],
-                      link_to(eval(%Q{"#{assemble_crumb_title(crumb)}"}),
+                      link_to(eval(%Q{"#{assemble_crumb_title(crumb).gsub('"', "'")}"}),
                               fetch_crumb_url(crumb)) +
                       Beard.instance.html[:trail][:delimiter].html_safe)
         end.html_safe
